@@ -8,7 +8,7 @@
     // if user signed in
     if (isset($_SESSION['user_id']))
     {
-        header("Location: menu.php");
+        header("Location: index.php");
         exit();
     }
     
@@ -51,7 +51,7 @@
         if (count($error) == 0)
         {
             $_SESSION['user_id'] = $row['id'];
-            header('Location: menu.php');
+            header('Location: index.php');
             exit();
         }
     }

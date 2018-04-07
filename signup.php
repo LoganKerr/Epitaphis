@@ -7,7 +7,7 @@ require_once("vendor/autoload.php");
 
 if (isset($_SESSION['user_id']))
 {
-    header("Location: menu.php");
+    header("Location: index.php");
 }
 
 // possible signup roles
@@ -38,25 +38,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	if (!empty($email))
 	{
 		// TODO: validate email with regex
-		// validate email is not already in use
+		// validates email is not already in use
 		$stmt = $conn->prepare("SELECT `email` FROM `users` WHERE `email`=?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $res = $stmt->get_result();
         
         if ($res->num_rows != 0) {
-            $error['email'] = " Email is already in use.";
+            $error['email'] = "Email is already in use.";
         }
 	}
 	
 	if (!empty($firstName))
 	{
-		// TODO: validate first name
+		// TODO: validate first name with regex
 	}
 	
 	if (!empty($lastName))
 	{
-		// TODO: validate last name
+		// TODO: validate last name with regex
 	}
 	
 	if (!empty($pass1))
@@ -66,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	
 	if (!empty($pass2))
 	{
-		// TODO: validate passwod confirm equals password
+		if ($pass1 != $pass2)
+        {
+            $error['pass2'] = "Passwords must match.";
+        }
 	}
     
 	if (count($error) == 0)
