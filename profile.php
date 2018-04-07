@@ -22,14 +22,37 @@
         // get data
         $bio = $_POST['bio'];
         
+        // goal id of new goal added
+        $new_goal_id = -1;
+        
         foreach ($_POST as $key => $value)
         {
+            // if new goal added
+            if (substr($key, 0, 13) == "goal_name_new")
+            {
+                // inserts new goal into goals table with name and empty text
+                $stmt = $conn->prepare("INSERT INTO `goals` (goalName, goalText) VALUES (?, '')");
+                $stmt->bind_param("s", $value);
+                $stmt->execute();
+                $new_goal_id = $conn->insert_id;
+                // inserts new goal into role_assoc for user who posted request
+                $stmt = $conn->prepare("INSERT INTO `goal_assoc` (user_id, goal_id) VALUES (?, ?)");
+                $stmt->bind_param("ii", $user_id, $new_goal_id);
+                $stmt->execute();
+            }
+            else if (substr($key, 0, 13) == "goal_text_new")
+            {
+                // updates goal text at new goal id
+                $stmt = $conn->prepare("UPDATE `goals` SET `goalText`=? WHERE `id`=?");
+                $stmt->bind_param("si", $value, $new_goal_id);
+                $stmt->execute();
+            }
             // updates user assigned to role
-            if (substr($key, 0, 9) == "goal_name")
+            else if (substr($key, 0, 9) == "goal_name")
             {
                 $goal_id = filter_var(substr($key, 9), FILTER_SANITIZE_NUMBER_INT);
                 $stmt = $conn->prepare("UPDATE `goals` SET `goalName`=? WHERE `id`=?");
-                $stmt->bind_param("si", $value ,$goal_id);
+                $stmt->bind_param("si", $value , $goal_id);
                 $stmt->execute();
             }
             // updates role name if changed
