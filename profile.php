@@ -19,8 +19,8 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $error = array();
-        // validate data -----------------------
-        // escape data
+        // get data
+        $bio = $_POST['bio'];
         
         foreach ($_POST as $key => $value)
         {
@@ -42,7 +42,16 @@
                 
             }
         }
-    }
+        if (count($error) == 0)
+        {
+            $stmt = $conn->prepare("UPDATE `users` SET `bio`=? WHERE `id`=?");
+            $stmt->bind_param("si", $bio, $user_id);
+            if (!$stmt->execute())
+            {
+                echo "Profile Error: ".$stmt->error;
+            }
+        }
+    } //ends post request
     
     $stmt = $conn->prepare("SELECT `goal_assoc`.`goal_id`, `goals`.`goalName`, `goals`.`goalText` FROM `goal_assoc` LEFT JOIN `goals` ON `goal_assoc`.`goal_id`=`goals`.`id` WHERE `goal_assoc`.`user_id`=?");
     $stmt->bind_param("i", $user_id);
@@ -56,6 +65,14 @@
         $i++;
     }
     
+    $stmt2 = $conn->prepare("SELECT `bio` FROM `users` WHERE `id`=?");
+    $stmt2->bind_param("i", $user_id);
+    $stmt2->execute();
+    $res2 = $stmt2->get_result();
+    $row2 = $res2->fetch_assoc();
+    
+    $bio = $row2['bio'];
+    
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
     
@@ -63,7 +80,8 @@
     
     echo $twig->render('profile.html', array(
                                              'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin),
-                                             'rows' => $rows
+                                             'rows' => $rows,
+                                             'bio' => $bio
                                              ));
     ?>
 

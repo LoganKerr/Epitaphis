@@ -7,6 +7,8 @@
             <div class="panel-body">
                 <form method="post" action="/Epitaphis/profile.php">
                     <p>
+                    <label class="form-label">Bio:</label><input type="text" name='bio' placeholder="Tell us about yourself" value='{{ bio }}'></input>
+                    <br>
                     <label class="form-label">Goals:</label>
                     {% for row in rows %}
                     <br>
