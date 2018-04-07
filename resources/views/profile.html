@@ -5,18 +5,40 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Change your information</div>
             <div class="panel-body">
+                <script>
+                    var boxId = 1;
+                    function addField(e)
+                    {
+                        var end = document.getElementById("test");
+                        var inputGoalName = document.createElement("input");
+                        var inputGoalText = document.createElement("input");
+                        inputGoalName.type="text";
+                        inputGoalText.type="text";
+                        inputGoalName.name="goal_name_new"+boxId;
+                        inputGoalText.name="goal_text_new"+boxId;
+                        boxId++;
+                        end.appendChild(document.createElement("br"));
+                        end.appendChild(inputGoalName);
+                        end.appendChild(inputGoalText);
+                        end.appendChild(document.createElement("br"));
+                    }
+                </script>
                 <form method="post" action="/Epitaphis/profile.php">
                     <p>
-                    <label class="form-label">Bio:</label><input type="text" name='bio' placeholder="Tell us about yourself" value='{{ bio }}'></input>
-                    <br>
-                    <label class="form-label">Goals:</label>
-                    {% for row in rows %}
-                    <br>
-                    <input type="text" name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
-                    <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
-                    <input type="text" name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
-                    {% endfor %}
+                        <label class="form-label">Bio:</label><input type="text" name='bio' placeholder="Tell us about yourself" value='{{ bio }}'></input>
+                        <br>
+                        <label class="form-label">Goals:</label>
+                        <div id='test'>
+                        {% for row in rows %}
+                            <br>
+                            <input type="text" name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
+                            <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
+                            <input type="text" name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
+                            <br>
+                        {% endfor %}
+                        </div>
                     </p>
+                    <button type="button" onclick='addField(event)'>Add a goal</button>
                     <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
                 </form>
             </div>
