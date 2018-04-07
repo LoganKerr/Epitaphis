@@ -1,0 +1,25 @@
+{% include 'templates/header.html' %}
+{% include 'templates/navbar.html' with nav %}
+<body>
+    <div id="signup-panel" class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Change your information</div>
+            <div class="panel-body">
+                <form method="post" action="/Epitaphis/profile.php">
+                    <p>
+                    <label class="form-label">Goals:</label>
+                    {% for row in rows %}
+                    <br>
+                    <input type="text" name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
+                    <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
+                    <input type="text" name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
+                    {% endfor %}
+                    </p>
+                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
