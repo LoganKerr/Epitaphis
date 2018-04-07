@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 04, 2018 at 10:14 PM
+-- Generation Time: Apr 07, 2018 at 10:42 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -22,8 +22,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `goals` (
 `id` int(11) NOT NULL,
-`goalName` varchar(256) NOT NULL,
-`goalText` varchar(256) NOT NULL
+`goalName` varchar(256) NOT NULL DEFAULT '',
+`goalText` varchar(256) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -31,7 +31,9 @@ CREATE TABLE `goals` (
 --
 
 INSERT INTO `goals` (`id`, `goalName`, `goalText`) VALUES
-(1, 'By the time I\'m 30', 'I wanna eat 300 mchickens');
+(1, 'Fuck', 'You'),
+(4, 'Test1', 'test2'),
+(5, 'Test1', 'test2');
 
 -- --------------------------------------------------------
 
@@ -50,7 +52,9 @@ CREATE TABLE `goal_assoc` (
 --
 
 INSERT INTO `goal_assoc` (`id`, `user_id`, `goal_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(4, 1, 4),
+(5, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -63,16 +67,20 @@ CREATE TABLE `users` (
 `email` varchar(256) NOT NULL,
 `firstName` varchar(256) NOT NULL,
 `lastName` varchar(256) NOT NULL,
+`bio` varchar(256) NOT NULL DEFAULT '',
 `passHash` varchar(256) NOT NULL,
-`admin` tinyint(1) NOT NULL
+`admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `passHash`, `admin`) VALUES
-(1, 'lkerr1998@gmail.com', 'Logan', 'Kerr', '$2y$10$h9HjjFScQIeEUc2PtKUQyOLEGvUIBphr5jhHmiVgJsY5miaz5PSNG', 0);
+INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `bio`, `passHash`, `admin`) VALUES
+(1, 'lkerr1998@gmail.com', 'Logan', 'Kerr', 'test', '$2y$10$h9HjjFScQIeEUc2PtKUQyOLEGvUIBphr5jhHmiVgJsY5miaz5PSNG', 0),
+(2, 'tmulvey@gmail.com', 'Tom', 'Mulvey', '', '$2y$10$HStceRTga.K7EyMsFYmQv.G8WEWdPu.mxjldMlq..H2ay2gvhebDK', 0),
+(3, 'mustafa@gmail.com', 'mustafa', 'kerr', '', '$2y$10$bIJR6na9aZ8cod8W7bMTv.NDBbmg5CkdANp0GVNijgQc5F7pTD5Ym', 0),
+(4, 'lkerr1999@gmail.com', 'Logan', 'Kerr', '', '$2y$10$4hjInxIMIW9CAeoOBrpOPeqejNhuGxcqJ135D7xaaYg1Oo57yMFBW', 0);
 
 --
 -- Indexes for dumped tables
@@ -104,14 +112,14 @@ ADD PRIMARY KEY (`id`);
 -- AUTO_INCREMENT for table `goals`
 --
 ALTER TABLE `goals`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `goal_assoc`
 --
 ALTER TABLE `goal_assoc`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
