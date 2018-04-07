@@ -27,8 +27,21 @@
         
         foreach ($_POST as $key => $value)
         {
+            echo substr($key, 0, 11)."<br>";
+            if (substr($key, 0, 11) == "goal_remove")
+            {
+                $goal_id = filter_var(substr($key, 11), FILTER_SANITIZE_NUMBER_INT);
+                // deletes role from role_assoc
+                $stmt = $conn->prepare("DELETE FROM `goal_assoc` WHERE `goal_id`=?");
+                $stmt->bind_param("i", $goal_id);
+                $stmt->execute();
+                // deletes role from row
+                $stmt = $conn->prepare("DELETE FROM `goals` WHERE `id`=?");
+                $stmt->bind_param("i", $goal_id);
+                $stmt->execute();
+            }
             // if new goal added
-            if (substr($key, 0, 13) == "goal_name_new")
+            else if (substr($key, 0, 13) == "goal_name_new")
             {
                 // inserts new goal into goals table with name and empty text
                 $stmt = $conn->prepare("INSERT INTO `goals` (goalName, goalText) VALUES (?, '')");
