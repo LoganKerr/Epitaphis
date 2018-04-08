@@ -96,8 +96,11 @@
         }
     } //ends post request
     
+    $profile_user_id = $_GET['id'];
+    $owner = (($profile_user_id == $user_id)? true : false);
+    
     $stmt = $conn->prepare("SELECT `goal_assoc`.`goal_id`, `goals`.`goalName`, `goals`.`goalText` FROM `goal_assoc` LEFT JOIN `goals` ON `goal_assoc`.`goal_id`=`goals`.`id` WHERE `goal_assoc`.`user_id`=?");
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("i", $profile_user_id);
     $stmt->execute();
     $res = $stmt->get_result();
     $i = 0;
@@ -109,7 +112,7 @@
     }
     
     $stmt2 = $conn->prepare("SELECT `firstName`, `lastName`, `bio` FROM `users` WHERE `id`=?");
-    $stmt2->bind_param("i", $user_id);
+    $stmt2->bind_param("i", $profile_user_id);
     $stmt2->execute();
     $res2 = $stmt2->get_result();
     $row2 = $res2->fetch_assoc();
@@ -117,9 +120,6 @@
     $bio = $row2['bio'];
     $firstName = $row2['firstName'];
     $lastName = $row2['lastName'];
-    
-    $profile_user_id = $_GET['id'];
-    $owner = (($profile_user_id == $user_id)? true : false);
     
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
@@ -129,6 +129,7 @@
     echo $twig->render('profile.html', array(
                                              'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin),
                                              'rows' => $rows,
+                                             'profile_user_id' => $profile_user_id,
                                              'bio' => $bio,
                                              'firstName' => $firstName,
                                              'lastName' => $lastName,
