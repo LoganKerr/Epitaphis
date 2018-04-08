@@ -144,3 +144,49 @@ body
     min-height: 460px;
 }
 
+/* stream php */
+.main-stream {
+    background: #fff;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+    min-height: 600px;
+}
+
+.stream-main-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;   
+}
+
+.left-posts{
+    width: 70%;
+    background: #c4c8ce;
+    margin-left: 3%;
+    margin-top: 3%;
+    min-height: 50px;
+    float: left;
+}
+
+.right-profile-pic {
+    width: 40%;
+    background: transparent;
+    margin-right: 3%;
+    margin-top:0%;
+    float: right;
+}
+
+.right-profile-name {
+    float: right;
+    margin-right: 1%;
+}
+
+.right-side{
+    float: right;
+    margin-right:5%;
+}
+
+.stream-prof-pic {
+}
+
