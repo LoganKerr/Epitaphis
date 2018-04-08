@@ -21,14 +21,18 @@
         $error = array();
         // get data
         
+        echo "1";
         foreach ($_POST as $key => $value)
         {
+            echo "2";
             // for each user this user is following
             if (substr($key, 0, 10) == "followUser")
             {
+                echo "3";
                 // if user wants to cancel following
                 if ($value == "follow")
                 {
+                    echo "4";
                     $following_id = filter_var(substr($key, 10), FILTER_SANITIZE_NUMBER_INT);
                     $stmt = $conn->prepare("SELECT * FROM `follower_assoc` WHERE `user_id`=? AND `following_id`=?");
                     $stmt->bind_param("ii", $user_id, $following_id);
@@ -36,6 +40,7 @@
                     $res = $stmt->get_result();
                     if ($res->num_rows == 0)
                     {
+                        echo "5";
                         $stmt = $conn->prepare("INSERT INTO `follower_assoc` (user_id, following_id) VALUES (?, ?)");
                         $stmt->bind_param("ii", $user_id, $following_id);
                         $stmt->execute();
@@ -46,7 +51,7 @@
         
     } //ends post request
     
-    header("Location: followers.php");
+    //header("Location: profile.php");
     
     ?>
 

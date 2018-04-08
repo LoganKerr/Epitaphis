@@ -110,6 +110,20 @@
         $i++;
     }
     
+    var_dump($user_id);
+    var_dump($profile_user_id);
+    $stmt4 = $conn->prepare("SELECT `accepted` from follower_assoc where user_id=? and following_id=?");
+    $stmt4->bind_param("ii", $user_id, $profile_user_id);
+    $res4 = $stmt4->get_result();
+    $followed = true;
+    
+    var_dump($res4);
+    
+    if ($res4->num_rows == 0) {
+        $followed = false;
+    }
+    
+    
     $bio = $row2['bio'];
     $firstName = $row2['firstName'];
     $lastName = $row2['lastName'];
@@ -131,7 +145,8 @@
                                              'lastName' => $lastName,
                                              'owner' => $owner,
                                              'profile_picture_path' => $profile_picture_path,
-                                             'profile_picture_id' => $profile_picture_id
+                                             'profile_picture_id' => $profile_picture_id,
+                                             'followed' => $followed
                                              ));
     ?>
 

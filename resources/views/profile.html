@@ -27,7 +27,6 @@
                                     }
                                     function selectPicture(e, id, path)
                                     {
-                                        console.log("SELECTED PICTURE");
                                         var profile_picture_list = document.getElementById("profile_picture_list")
                                         var profile_picture_id=document.getElementById("profile_picture_id");
                                         var selected_profile_picture = document.getElementById("selected_profile_picture");
@@ -62,14 +61,24 @@
                                     <label class="form-label">Bio:</label>
                                     <input type="text" name="bio" placeholder="Tell us about yourself" value="{{ bio }}">
                                     <div class="submit-button"><input class="btn btn-primary profile-submit-button" type="submit" value="SUBMIT"></div>
-                {% else %}
-                {{ bio }}
-                {% endif %}
+                                    {% else %}
+                                        {{ bio }}
+                                    {% endif %}
                                 </div>
                                 <!-- END SIDEBAR USER TITLE -->
                                 <!-- SIDEBAR MENU START -->
                                 <div class="profile-userbuttons">
-                                    <button type="button" class="btn btn-success">Follow</button>
+                                    {% if not(owner) %}
+                                    <form method="post" action="followUser.php">
+                                        {% if followed %}
+                                        <button class="btn btn-success">Unfollow</button>
+                                        <input type="hidden" name="followUser{{ profile_user }}" value="unfollow"/>
+                                        {% else %}
+                                        <button class="btn btn-success">Follow</button>
+                                        <input type="hidden" name="followUser{{ profile_user }}" value="follow"/>
+                                        {% endif %}
+                                    </form>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
