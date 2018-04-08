@@ -180,6 +180,12 @@ body
     margin-bottom: 2em;
 }
 
+.profile-pic-list {
+    list-style-type: none;
+    margin-right: 3em;
+    margin-top: 1em;
+}
+
 .row.profile{
 
 }
