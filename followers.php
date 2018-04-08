@@ -67,7 +67,7 @@
         $i++;
     }
     
-    $stmt5 = $conn->prepare("SELECT `users`.`firstName`, `users`.`lastName` FROM `users` WHERE `id`=?");
+    $stmt5 = $conn->prepare("SELECT `users`.`firstName`, `users`.`lastName`, `profile_pictures`.`path` FROM `users` INNER JOIN `profile_pictures` ON `users`.`profile_picture_id`=`profile_pictures`.`id` WHERE `users`.`id`=?");
     $stmt5->bind_param("i", $user_id);
     $stmt5->execute();
     $res5 = $stmt5->get_result();
@@ -75,6 +75,7 @@
     
     $firstName = $row5['firstName'];
     $lastName = $row5['lastName'];
+    $profile_picture_path = $row5['path'];
     
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
@@ -88,7 +89,8 @@
                                                 'usersRequestingToFollowYou' => $rows3,
                                                 'usersSearch' => $rows4,
                                                 'firstName' => $firstName,
-                                                'lastName' => $lastName
+                                                'lastName' => $lastName,
+                                                'profile_picture_path' => $profile_picture_path
                                                )
                        );
 ?>
