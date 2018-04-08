@@ -39,10 +39,10 @@
                                 <img id="selected_profile_picture" src="/Epitaphis/resources/images/profile_photos/{{ profile_picture_path }}">
                                     {% if owner %}
                                     <input type="hidden" id="profile_picture_id" name="profile_picture_id" value="{{ profile_picture_id }}"></input>
-                                    <button type="button" onclick="toggleProfilePictures(event);">Choose profile picture</button>
+                                    <button type="button" class="btn btn-default profile-button" onclick="toggleProfilePictures(event);">Choose profile picture</button>
                                     <ul id="profile_picture_list" hidden=true>
                                     {% for row in image_rows %}
-                                    <li
+				    <li>
                                         <button type="button" onclick="selectPicture(event, {{ row['id'] }}, '{{ row['path'] }}')">
                                             <image src="/Epitaphis/resources/images/profile_photos/{{ row['path'] }}"></image>
                                         </button>
@@ -61,7 +61,7 @@
                                     <input type="hidden" name="profile_user_id" value="{{ profile_user_id }}"></input>
                                     <label class="form-label">Bio:</label>
                                     <input type="text" name="bio" placeholder="Tell us about yourself" value="{{ bio }}">
-                                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit"></div>
+                                    <div class="submit-button"><input class="btn btn-primary profile-submit-button" type="submit" value="SUBMIT"></div>
                 {% else %}
                 {{ bio }}
                 {% endif %}
@@ -69,7 +69,7 @@
                                 <!-- END SIDEBAR USER TITLE -->
                                 <!-- SIDEBAR MENU START -->
                                 <div class="profile-userbuttons">
-                                    <button type="button" class="btn btn-success btn-sm">Follow</button>
+                                    <button type="button" class="btn btn-success">Follow</button>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
 		    </div>
 
                 <div class="col-md-9">
-			<div><p>Insert some quote here</p>
+			<div class="quote">Insert quote here
 		    </div>
                     <div class="profile-content">
                         <div class="panel-heading">Change your information</div>
