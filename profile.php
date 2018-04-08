@@ -20,6 +20,11 @@
     {
         $error = array();
         // get data
+        $profile_user_id = $_POST['profile_user_id'];
+        if ($user_id != $profile_user_id)
+        {
+            header("Location: profile.php?id=".$profile_user_id);
+        }
         $bio = $_POST['bio'];
         
         // goal id of new goal added
@@ -103,13 +108,18 @@
         $i++;
     }
     
-    $stmt2 = $conn->prepare("SELECT `bio` FROM `users` WHERE `id`=?");
+    $stmt2 = $conn->prepare("SELECT `firstName`, `lastName`, `bio` FROM `users` WHERE `id`=?");
     $stmt2->bind_param("i", $user_id);
     $stmt2->execute();
     $res2 = $stmt2->get_result();
     $row2 = $res2->fetch_assoc();
     
     $bio = $row2['bio'];
+    $firstName = $row2['firstName'];
+    $lastName = $row2['lastName'];
+    
+    $profile_user_id = $_GET['id'];
+    $owner = (($profile_user_id == $user_id)? true : false);
     
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
@@ -119,7 +129,10 @@
     echo $twig->render('profile.html', array(
                                              'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin),
                                              'rows' => $rows,
-                                             'bio' => $bio
+                                             'bio' => $bio,
+                                             'firstName' => $firstName,
+                                             'lastName' => $lastName,
+                                             'owner' => $owner
                                              ));
     ?>
 
