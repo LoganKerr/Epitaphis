@@ -54,6 +54,19 @@
         $i++;
     }
     
+    // list of users you can request fo follow
+    $stmt4 = $conn->prepare("SELECT `users`.`id`, `users`.`firstName`, `users`.`lastName` FROM `users` WHERE `users`.`id`!=?");
+    $stmt4->bind_param("i", $user_id);
+    $stmt4->execute();
+    $res4 = $stmt4->get_result();
+    $i = 0;
+    
+    while ($row4 = $res4->fetch_assoc())
+    {
+        $rows4[$i] = $row4;
+        $i++;
+    }
+    
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
     
@@ -63,7 +76,8 @@
                                                'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin),
                                                 'usersYouAreFollowing' => $rows,
                                                 'usersFollowingYou' => $rows2,
-                                                'usersRequestingToFollowYou' => $rows3
+                                                'usersRequestingToFollowYou' => $rows3,
+                                                'usersYouCanFollow' => $rows4
                                                )
                        );
 ?>

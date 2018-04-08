@@ -24,20 +24,14 @@
         foreach ($_POST as $key => $value)
         {
             // for each user this user is following
-            if (substr($key, 0, 26) == "usersRequestingToFollowYou")
+            if (substr($key, 0, 10) == "followUser")
             {
-                $following_id = filter_var(substr($key, 26), FILTER_SANITIZE_NUMBER_INT);
-                if ($value == "accept")
+                // if user wants to cancel following
+                if ($value == "follow")
                 {
-                    $stmt = $conn->prepare("UPDATE `follower_assoc` SET `accepted`=? WHERE `user_id`=? AND `following_id`=?");
-                    $accepted = 1;
-                    $stmt->bind_param("iii", $accepted, $following_id, $user_id);
-                    $stmt->execute();
-                }
-                elseif ($value == "reject")
-                {
-                    $stmt = $conn->prepare("DELETE FROM `follower_assoc` WHERE `user_id`=? AND `following_id`=?");
-                    $stmt->bind_param("ii", $following_id, $user_id);
+                    $following_id = filter_var(substr($key, 10), FILTER_SANITIZE_NUMBER_INT);
+                    $stmt = $conn->prepare("INSERT INTO `follower_assoc` (user_id, following_id) VALUES (?, ?)");
+                    $stmt->bind_param("ii", $user_id, $following_id);
                     $stmt->execute();
                 }
             }
@@ -47,4 +41,5 @@
     
     header("Location: followers.php");
     
-?>
+    ?>
+
