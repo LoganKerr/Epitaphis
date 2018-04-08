@@ -63,9 +63,8 @@ body
 
 .profile-epit-logo {
     float:0;
-    width: 22%;
-    height: 25%;
-    padding-left: 15px;
+    width: 23%;
+    padding-left: 26px;
 }
 
 /* PROFILE container */
@@ -94,7 +93,11 @@ body
 
 .quote {
     opacity: 0.65;
+    padding-left: 33px;
+    text-transform: capitalize;
     display: inline;
+    font-size: 21px;
+    font-size: oblique;
 }
 
 .profile-usertitle{
