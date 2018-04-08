@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 08, 2018 at 10:24 AM
+-- Generation Time: Apr 08, 2018 at 01:39 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -32,7 +32,7 @@ CREATE TABLE `follower_assoc` (
 --
 
 INSERT INTO `follower_assoc` (`id`, `user_id`, `following_id`, `accepted`) VALUES
-(5, 1, 2, 0),
+(5, 1, 2, 1),
 (6, 1, 3, 0);
 
 -- --------------------------------------------------------
@@ -43,17 +43,17 @@ INSERT INTO `follower_assoc` (`id`, `user_id`, `following_id`, `accepted`) VALUE
 
 CREATE TABLE `goals` (
 `id` int(11) NOT NULL,
-`goalName` varchar(256) NOT NULL DEFAULT '',
-`goalText` varchar(256) NOT NULL DEFAULT ''
+`goal` varchar(256) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `goals`
 --
 
-INSERT INTO `goals` (`id`, `goalName`, `goalText`) VALUES
-(14, 'test', '4'),
-(15, 'test', '');
+INSERT INTO `goals` (`id`, `goal`) VALUES
+(17, 'test1'),
+(18, 'Fuck'),
+(19, 'test');
 
 -- --------------------------------------------------------
 
@@ -64,16 +64,19 @@ INSERT INTO `goals` (`id`, `goalName`, `goalText`) VALUES
 CREATE TABLE `goal_assoc` (
 `id` int(11) NOT NULL,
 `user_id` int(11) NOT NULL,
-`goal_id` int(11) NOT NULL
+`goal_id` int(11) NOT NULL,
+`status_id` int(11) NOT NULL DEFAULT '1',
+`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `goal_assoc`
 --
 
-INSERT INTO `goal_assoc` (`id`, `user_id`, `goal_id`) VALUES
-(14, 1, 14),
-(15, 1, 15);
+INSERT INTO `goal_assoc` (`id`, `user_id`, `goal_id`, `status_id`, `timestamp`) VALUES
+(17, 1, 17, 0, '2018-04-08 10:07:29'),
+(18, 2, 18, 0, '2018-04-08 10:33:11'),
+(19, 1, 19, 1, '2018-04-08 11:33:55');
 
 -- --------------------------------------------------------
 
@@ -106,6 +109,26 @@ INSERT INTO `profile_pictures` (`id`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `statuses`
+--
+
+CREATE TABLE `statuses` (
+`id` int(11) NOT NULL,
+`status` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `statuses`
+--
+
+INSERT INTO `statuses` (`id`, `status`) VALUES
+(1, 'To Do'),
+(2, 'In Progress'),
+(3, 'Completed');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -125,7 +148,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `bio`, `passHash`, `admin`, `profile_picture_id`) VALUES
-(1, 'lkerr1998@gmail.com', 'Logan', 'Kerr', 'test', '$2y$10$h9HjjFScQIeEUc2PtKUQyOLEGvUIBphr5jhHmiVgJsY5miaz5PSNG', 0, 1),
+(1, 'lkerr1998@gmail.com', 'Logan', 'Kerr', '', '$2y$10$h9HjjFScQIeEUc2PtKUQyOLEGvUIBphr5jhHmiVgJsY5miaz5PSNG', 0, 0),
 (2, 'tmulvey@gmail.com', 'Tom', 'Mulvey', '', '$2y$10$HStceRTga.K7EyMsFYmQv.G8WEWdPu.mxjldMlq..H2ay2gvhebDK', 0, 6),
 (3, 'mustafa@gmail.com', 'mustafa', 'kerr', '', '$2y$10$bIJR6na9aZ8cod8W7bMTv.NDBbmg5CkdANp0GVNijgQc5F7pTD5Ym', 0, 7),
 (4, 'lkerr1999@gmail.com', 'Logan', 'Kerr', '', '$2y$10$4hjInxIMIW9CAeoOBrpOPeqejNhuGxcqJ135D7xaaYg1Oo57yMFBW', 0, 8);
@@ -159,6 +182,12 @@ ALTER TABLE `profile_pictures`
 ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `statuses`
+--
+ALTER TABLE `statuses`
+ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -177,17 +206,22 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `goals`
 --
 ALTER TABLE `goals`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `goal_assoc`
 --
 ALTER TABLE `goal_assoc`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `profile_pictures`
 --
 ALTER TABLE `profile_pictures`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `statuses`
+--
+ALTER TABLE `statuses`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

@@ -46,12 +46,12 @@
                 $stmt->execute();
             }
             // if new goal added
-            else if (substr($key, 0, 13) == "goal_name_new")
+            else if (substr($key, 0, 8) == "goal_new")
             {
                 if ($value != "")
                 {
                     // inserts new goal into goals table with name and empty text
-                    $stmt = $conn->prepare("INSERT INTO `goals` (goalName, goalText) VALUES (?, '')");
+                    $stmt = $conn->prepare("INSERT INTO `goals` (goal) VALUES (?)");
                     $stmt->bind_param("s", $value);
                     $stmt->execute();
                     $new_goal_id = $conn->insert_id;
@@ -61,29 +61,13 @@
                     $stmt->execute();
                 }
             }
-            else if (substr($key, 0, 13) == "goal_text_new")
-            {
-                // updates goal text at new goal id
-                $stmt = $conn->prepare("UPDATE `goals` SET `goalText`=? WHERE `id`=?");
-                $stmt->bind_param("si", $value, $new_goal_id);
-                $stmt->execute();
-            }
             // updates user assigned to role
-            else if (substr($key, 0, 9) == "goal_name")
+            else if (substr($key, 0, 9) == "goal_edit")
             {
                 $goal_id = filter_var(substr($key, 9), FILTER_SANITIZE_NUMBER_INT);
-                $stmt = $conn->prepare("UPDATE `goals` SET `goalName`=? WHERE `id`=?");
+                $stmt = $conn->prepare("UPDATE `goals` SET `goal`=? WHERE `id`=?");
                 $stmt->bind_param("si", $value , $goal_id);
                 $stmt->execute();
-            }
-            // updates role name if changed
-            else if (substr($key, 0, 9) == "goal_text")
-            {
-                $goal_id = filter_var(substr($key, 9), FILTER_SANITIZE_NUMBER_INT);
-                $stmt = $conn->prepare("UPDATE `goals` SET `goalText`=? WHERE `id`=?");
-                $stmt->bind_param("si", $value, $goal_id);
-                $stmt->execute();
-                
             }
         }
         if (count($error) == 0)
@@ -97,7 +81,7 @@
     $profile_user_id = (($_GET['id'])? $_GET['id'] : $user_id);
     $owner = (($profile_user_id == $user_id)? true : false);
     
-    $stmt = $conn->prepare("SELECT `goal_assoc`.`goal_id`, `goals`.`goalName`, `goals`.`goalText` FROM `goal_assoc` LEFT JOIN `goals` ON `goal_assoc`.`goal_id`=`goals`.`id` WHERE `goal_assoc`.`user_id`=?");
+    $stmt = $conn->prepare("SELECT `goal_assoc`.`goal_id`, `goals`.`goal` FROM `goal_assoc` LEFT JOIN `goals` ON `goal_assoc`.`goal_id`=`goals`.`id` WHERE `goal_assoc`.`user_id`=?");
     $stmt->bind_param("i", $profile_user_id);
     $stmt->execute();
     $res = $stmt->get_result();

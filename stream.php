@@ -20,12 +20,14 @@
     
     $admin = check_if_user_is_admin($_SESSION['user_id']);
     
-    $stmt = $conn->prepare("SELECT `users`.`firstName`, `goals`.`goalName`, `goals`.`goalText`, profile_pictures.path, `goal_assoc`.`timestamp` from follower_assoc inner join users on follower_assoc.user_id=users.id inner join goal_assoc on follower_assoc.following_id=goal_assoc.user_id inner join goals on goal_assoc.goal_id=goals.id inner join profile_pictures on users.profile_picture_id=profile_pictures.id where follower_assoc.user_id=? and accepted ORDER BY `goal_assoc`.`timestamp` ASC");
+    $stmt = $conn->prepare("SELECT `users`.`firstName`, `goals`.`goal`, profile_pictures.path, `goal_assoc`.`timestamp` from follower_assoc inner join users on follower_assoc.user_id=users.id inner join goal_assoc on follower_assoc.following_id=goal_assoc.user_id inner join goals on goal_assoc.goal_id=goals.id inner join profile_pictures on users.profile_picture_id=profile_pictures.id where follower_assoc.user_id=? and accepted ORDER BY `goal_assoc`.`timestamp` ASC");
     
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $res = $stmt->get_result();
     $i = 0;
+    
+    var_dump($res);
     
     while ($row = $res->fetch_assoc())
     {
