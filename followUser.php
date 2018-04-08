@@ -30,9 +30,16 @@
                 if ($value == "follow")
                 {
                     $following_id = filter_var(substr($key, 10), FILTER_SANITIZE_NUMBER_INT);
-                    $stmt = $conn->prepare("INSERT INTO `follower_assoc` (user_id, following_id) VALUES (?, ?)");
+                    $stmt = $conn->prepare("SELECT * FROM `follower_assoc` WHERE `user_id`=? AND `following_id`=?");
                     $stmt->bind_param("ii", $user_id, $following_id);
                     $stmt->execute();
+                    $res = $stmt->get_result();
+                    if ($res->num_rows == 0)
+                    {
+                        $stmt = $conn->prepare("INSERT INTO `follower_assoc` (user_id, following_id) VALUES (?, ?)");
+                        $stmt->bind_param("ii", $user_id, $following_id);
+                        $stmt->execute();
+                    }
                 }
             }
         }
