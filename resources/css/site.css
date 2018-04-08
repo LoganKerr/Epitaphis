@@ -52,7 +52,7 @@
 
 body
 {
-    background-color:white;
+    background-color:#d1ccc6;
 }
 
 .home-left
@@ -112,3 +112,87 @@ body
 {
     width: 75%;
 }
+
+.profile-epit-logo {
+    float:0;
+    width: 23%;
+    padding-left: 26px;
+}
+
+/* PROFILE container */
+.profile {
+    margin: 20px 0;
+}
+
+/* Profile Sidebar */
+.profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: white;
+}
+
+/* Profile User Pic */
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    margin-left: 25%;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.quote {
+    opacity: 0.65;
+    padding-left: 33px;
+    text-transform: capitalize;
+    display: inline;
+    font-size: 21px;
+    font-size: oblique;
+}
+
+.profile-usertitle{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.profile-usertitle-bio {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+}
+
+/* Profile Content */
+.profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+}
+

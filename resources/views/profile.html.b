@@ -1,7 +1,6 @@
 {% include 'templates/header.html' %}
 {% include 'templates/navbar.html' with nav %}
 <body>
-<<<<<<< HEAD
     <div id="signup-panel" class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">Change your information</div>
@@ -23,11 +22,13 @@
                         end.appendChild(inputGoalText);
                         end.appendChild(document.createElement("br"));
                     }
-                    function removeGoal(e, id)
+                    function removeGoal(e)
                     {
-                        var goal_name = document.getElementById("goal_name"+id);
-                        var goal_text = document.getElementById("goal_text"+id);
-                        var goal_button = document.getElementById("goal_button"+id);
+                        var target = document.getElementById(e.target.id);
+                        var targetId = target.id.substring(11);
+                        var goal_name = document.getElementById("goal_name"+targetId);
+                        var goal_text = document.getElementById("goal_text"+targetId);
+                        var goal_button = document.getElementById("goal_button"+targetId);
                         if (target.value == "remove")
                         {
                             goal_name.disabled=false;
@@ -61,7 +62,7 @@
                             <input type="text" id='goal_name{{ row['goal_id'] }}' name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
                             <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
                             <input type="text" id='goal_text{{ row['goal_id'] }}' name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
-                            <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event, {{ row['goal_id'] }})'>Remove</button>
+                            <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event)'>Remove</button>
                             <br>
                         {% endfor %}
                         </div>
@@ -71,46 +72,7 @@
                 </form>
             </div>
         </div>
-=======
-    <div class="container">
-	<div class="epit-logo">
-	    <img class="profile-epit-logo" src="/Epitaphis/resources/images/epitaph-01.svg"> 
-	    <div class="quote">be yourself, because that is who we love :)</div>
-	</div>
-
-	<div class="row profile">
-	    <div class="col-md-3">
-		<div class="profile-sidebar">
-       		    <!-- SIDEBAR USERPIC -->
-		    <div class="profile-userpic">
-			    <img src="/Epitaphis/resources/images/profile_photos/orange_ghostie.png">
-		    <!-- END SIDEBAR USERPIC  -->
-		    <!-- SIDEBAR USER TITLE -->
-		        <div class="profile-usertitle">
-			    <div class="profile-usertitle-name">
-				    NAME HERE </div>
-			    <div class="profile-user-bio">
-			        USER BIO GOES EHERE:
-			    </div>
-			        <!-- END SIDEBAR USER TITLE -->
-			        <!-- SIDEBAR MENU START -->
-			        <div class="profile-userbuttons">
-		   		    <button type="button" class="btn btn-success btn-sm">Follow</button>
-			        </div>
-			    </div>
-		        </div> 
-		    </div>
-		</div>
-		    <div class="col-md-9">
-			<div class="profile-content">
-			    USER CONTENT HERE
-			</div>
-		    </div>
-	    </div>
-	</div>
->>>>>>> origin/tom-devel
     </div>
-
 </body>
 </html>
 
