@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 07, 2018 at 10:42 PM
+-- Generation Time: Apr 08, 2018 at 07:23 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -13,6 +13,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `epitaphis`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `follower_assoc`
+--
+
+CREATE TABLE `follower_assoc` (
+`id` int(11) NOT NULL,
+`user_id` int(11) NOT NULL,
+`following_id` int(11) NOT NULL,
+`accepted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `follower_assoc`
+--
+
+INSERT INTO `follower_assoc` (`id`, `user_id`, `following_id`, `accepted`) VALUES
+(5, 1, 2, 0),
+(6, 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -31,9 +52,7 @@ CREATE TABLE `goals` (
 --
 
 INSERT INTO `goals` (`id`, `goalName`, `goalText`) VALUES
-(1, 'Fuck', 'You'),
-(4, 'Test1', 'test2'),
-(5, 'Test1', 'test2');
+(11, 'test', '1');
 
 -- --------------------------------------------------------
 
@@ -52,9 +71,7 @@ CREATE TABLE `goal_assoc` (
 --
 
 INSERT INTO `goal_assoc` (`id`, `user_id`, `goal_id`) VALUES
-(1, 1, 1),
-(4, 1, 4),
-(5, 1, 5);
+(11, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -87,6 +104,12 @@ INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `bio`, `passHash`, 
 --
 
 --
+-- Indexes for table `follower_assoc`
+--
+ALTER TABLE `follower_assoc`
+ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `goals`
 --
 ALTER TABLE `goals`
@@ -109,15 +132,20 @@ ADD PRIMARY KEY (`id`);
 --
 
 --
+-- AUTO_INCREMENT for table `follower_assoc`
+--
+ALTER TABLE `follower_assoc`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `goals`
 --
 ALTER TABLE `goals`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `goal_assoc`
 --
 ALTER TABLE `goal_assoc`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users`
 --
