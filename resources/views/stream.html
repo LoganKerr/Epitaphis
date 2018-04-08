@@ -4,7 +4,7 @@
     <div class="stream-main-logo">
         <img src="/Epitaphis/resources/images/epitaph-01.svg" >
     </div>
-    <div class="main-stream">
+    <div class="main-stream" style="width: 70%; margin-right: 30%;">
         {% for row in rows %}
             <div class="left-posts">
                 {{ row['goalName'] ~ ", " ~ row['goalText'] }}
@@ -12,9 +12,7 @@
             <div class="right-side">
                 <div class="right-profile-pic">
                     <img src="/Epitaphis/resources/images/profile_photos/{{ row['path'] }}" style="width:100%;" >
-                </div>
-                <div class="right-profile-name">
-                    <p>{{ row['firstName'] ~ " " ~ row['lastName'] }}</p>
+                    <figcaption>{{ row['firstName'] ~ " " ~ row['lastName'] ~ "   " ~ row['timestamp'] }}</figcaption>
                 </div>
             </div>
             <br>
