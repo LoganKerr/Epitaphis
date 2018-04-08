@@ -67,6 +67,15 @@
         $i++;
     }
     
+    $stmt5 = $conn->prepare("SELECT `users`.`firstName`, `users`.`lastName` FROM `users` WHERE `id`=?");
+    $stmt5->bind_param("i", $user_id);
+    $stmt5->execute();
+    $res5 = $stmt5->get_result();
+    $row5 = $res5->fetch_assoc();
+    
+    $firstName = $row5['firstName'];
+    $lastName = $row5['lastName'];
+    
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
     
@@ -77,7 +86,9 @@
                                                 'usersYouAreFollowing' => $rows,
                                                 'usersFollowingYou' => $rows2,
                                                 'usersRequestingToFollowYou' => $rows3,
-                                                'usersSearch' => $rows4
+                                                'usersSearch' => $rows4,
+                                                'firstName' => $firstName,
+                                                'lastName' => $lastName
                                                )
                        );
 ?>
