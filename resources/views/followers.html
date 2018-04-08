@@ -36,24 +36,24 @@
                     <script>
                         /* When the user clicks on the button,
                          toggle between hiding and showing the dropdown content */
-                        function myFunction() {
-                            document.getElementById("myDropdown").classList.toggle("show");
-                        }
+                    function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                    }
                     
-                        function filterFunction() {
-                            var input, filter, ul, li, a, i;
-                            input = document.getElementById("myInput");
-                            filter = input.value.toUpperCase();
-                            div = document.getElementById("myDropdown");
-                            a = div.getElementsByTagName("button");
-                            for (i = 0; i < a.length; i++) {
-                                if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                    a[i].style.display = "";
-                                } else {
-                                    a[i].style.display = "none";
-                                }
+                    function filterFunction() {
+                        var input, filter, ul, li, a, i;
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        div = document.getElementById("myDropdown");
+                        a = div.getElementsByTagName("a");
+                        for (i = 0; i < a.length; i++) {
+                            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                a[i].style.display = "";
+                            } else {
+                                a[i].style.display = "none";
                             }
                         }
+                    }
                     
                         function toggleAddUser(event, id)
                         {
@@ -71,19 +71,15 @@
                             }
                         }
                     </script>
-                    <form method="post" action="/Epitaphis/followUser.php">
                     <div class="dropdown">
-                        <button type="button" onclick="myFunction()" class="dropbtn">Follow User</button>
+                        <button onclick="myFunction()" class="dropbtn">Search Users</button>
                         <div id="myDropdown" class="dropdown-content">
                             <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                {% for row in usersYouCanFollow %}
-                                <button type="button" id="followUserButton{{ row['id'] }}" onclick="toggleAddUser(event, {{ row['id'] }})">{{ row['firstName'] ~ " " ~ row['lastName'] }}</button>
-                                    <input type="hidden" id="followUser{{ row['id'] }}" name="followUser{{ row['id'] }}" value=""></input>
+                                {% for row in usersSearch %}
+                                <a href="profile.php?id={{ row['id'] }}">{{ row['firstName'] ~  " " ~ row['lastName']}}</a>
                                 {% endfor %}
-                        </div>
+                                </div>
                     </div>
-                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
-                    </form>
                     <div id="Following" class="tabcontent">
                         <script>
                             function toggleCancelUser(e, id)

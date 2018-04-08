@@ -77,7 +77,7 @@
                                                 'usersYouAreFollowing' => $rows,
                                                 'usersFollowingYou' => $rows2,
                                                 'usersRequestingToFollowYou' => $rows3,
-                                                'usersYouCanFollow' => $rows4
+                                                'usersSearch' => $rows4
                                                )
                        );
 ?>
