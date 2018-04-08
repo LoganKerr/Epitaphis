@@ -39,7 +39,6 @@
                             {
                                 var user = document.getElementById("usersYouAreFollowing"+id);
                                 var userLI = document.getElementById("usersYouAreFollowingLI"+id);
-                                var userButton = document.getElementById("usersYouAreFollowingButton"+id);
                                 if (user.value == "cancel")
                                 {
                                    // uncancels user from following given user
@@ -75,7 +74,6 @@
                             {
                                 var user = document.getElementById("usersFollowingYou"+id);
                                 var userLI = document.getElementById("usersFollowingYouLI"+id);
-                                var userButton = document.getElementById("usersFollowingYouButton"+id);
                                 if (user.value == "remove")
                                 {
                                     // unremoves user from following given user
@@ -106,15 +104,44 @@
                         </form>
                     </div>
                     <div id="Requests" class="tabcontent">
+                        <script>
+                            function acceptFollower(e, id)
+                            {
+                                var user = document.getElementById("usersRequestingToFollowYou"+id);
+                                var userLI = document.getElementById("usersRequestingToFollowYouLI"+id);
+                                if (user.value != "accept")
+                                {
+                                    // rejects user from following
+                                    user.value="accept";
+                                    userLI.style="background: green;";
+                                }
+                            }
+                            function rejectFollower(e, id)
+                            {
+                                var user = document.getElementById("usersRequestingToFollowYou"+id);
+                                var userLI = document.getElementById("usersRequestingToFollowYouLI"+id);
+                                if (user.value != "reject")
+                                {
+                                    // unremoves user from following given user
+                                    user.value="reject";
+                                    userLI.style="background: #CCC;";
+                                }
+                            }
+                        </script>
                         <h3>Who is requesting to follow you:</h3>
                         <form method="post" action="/Epitaphis/followerRequests.php">
                             <p>
                             <ul>
                                 {% for row in usersRequestingToFollowYou %}
-                                <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                <li id="usersRequestingToFollowYouLI{{ row['id'] }}">{{ row['firstName'] ~ " " ~ row['lastName'] }}
+                                    <input type="hidden" id="usersRequestingToFollowYou{{ row['id'] }}" name="usersRequestingToFollowYou{{ row['id'] }}" value="" />
+                                    <button type="button" id="usersRequestingToFollowYouAccept{{ row['id'] }}" onclick="acceptFollower(event, {{ row['id'] }})">Accept</button>
+                                    <button type="button" id="usersRequestingToFollowYouReject{{ row['id'] }}" onclick="rejectFollower(event, {{ row['id'] }})">Reject</button>
+                                </li>
                                 {% endfor %}
                             </ul>
                             </p>
+                            <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
                         </form>
                     </div>
                 </div>
