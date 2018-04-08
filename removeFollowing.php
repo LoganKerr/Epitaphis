@@ -41,14 +41,4 @@
     
     header("Location: followers.php");
     
-    /*
-    $loader = new Twig_Loader_Filesystem('resources/views');
-    $twig = new Twig_Environment($loader);
-    
-    $admin = check_if_user_is_admin($_SESSION['user_id']);
-    
-    echo $twig->render('followers.html', array(
-                                             'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin)
-                                             ));
-     */
     ?>

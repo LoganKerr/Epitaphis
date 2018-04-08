@@ -70,15 +70,39 @@
                         </form>
                     </div>
                     <div id="Followers" class="tabcontent">
+                        <script>
+                            function toggleRemoveFollower(e, id)
+                            {
+                                var user = document.getElementById("usersFollowingYou"+id);
+                                var userLI = document.getElementById("usersFollowingYouLI"+id);
+                                var userButton = document.getElementById("usersFollowingYouButton"+id);
+                                if (user.value == "remove")
+                                {
+                                    // unremoves user from following given user
+                                    user.value="";
+                                    userLI.style="";
+                                }
+                                else
+                                {
+                                    // removes user from following given user
+                                    user.value="remove";
+                                    userLI.style="background: #CCC;";
+                                }
+                            }
+                        </script>
                         <h3>Who is following you:</h3>
                         <form method="post" action="/Epitaphis/removeFollowers.php">
                             <p>
                             <ul>
                                 {% for row in usersFollowingYou %}
-                                <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                <li id="usersFollowingYouLI{{ row['id'] }}">{{ row['firstName'] ~ " " ~ row['lastName'] }}
+                                    <input type="hidden" id="usersFollowingYou{{ row['id'] }}" name="usersFollowingYou{{ row['id'] }}" value="" />
+                                    <button type="button" id="usersFollowingYouButton{{ row['id'] }}" onclick="toggleRemoveFollower(event, {{ row['id'] }})">Remove</button>
+                                </li>
                                 {% endfor %}
                             </ul>
                             </p>
+                            <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
                         </form>
                     </div>
                     <div id="Requests" class="tabcontent">
