@@ -142,7 +142,9 @@ body
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
 }
-
+.row.profile{
+    background-color: white;
+}
 .quote {
     opacity: 0.65;
     padding-left: 33px;

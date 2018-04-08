@@ -1,16 +1,14 @@
 {% include 'templates/header.html' %}
 {% include 'templates/navbar.html' with nav %}
 <body>
-    <div id="signup-panel" class="container">
-        <div class="panel panel-primary">
-            <div class="container">
-                <div class="epit-logo">
-                    <img class="profile-epit-logo" src="/Epitaphis/resources/images/epitaph-01.svg">
-                    <div class="quote">be yourself, because that is who we love :)</div>
-                </div>
-	        <div class="row profile">
+
+	<div class="row profile">
                     <div class="col-md-3">
-                        <div class="profile-sidebar">
+			    <div class="epit-logo">
+				    <img src="/Epitaphis/resources/images/epitaph-01.svg">
+			    </div>
+			
+    <div class="profile-sidebar">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
                                 <img src="/Epitaphis/resources/images/profile_photos/orange_ghostie.png">
@@ -30,9 +28,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 		    </div>
-		</div>
+
                 <div class="col-md-9">
+			<div><p>Insert some quote here</p>
+		    </div>
                     <div class="profile-content">
                         <div class="panel-heading">Change your information</div>
                             <div class="panel-body">
@@ -83,29 +84,19 @@
                                 <form method="post" action="/Epitaphis/profile.php">
                                     <p>
                                     <label class="form-label">Bio:</label>
-                                    <input type="text" name='bio' placeholder="Tell us about yourself" value='{{ bio }}'></input>
+                                    <input type="text" name="bio" placeholder="Tell us about yourself" value="">
                                     <br>
                                     <label class="form-label">Goals:</label>
-                                    <div id='test'>
-                                        {% for row in rows %}
-                                        <br>
-                                        <input type="text" id='goal_name{{ row['goal_id'] }}' name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
-                                        <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
-                                        <input type="text" id='goal_text{{ row['goal_id'] }}' name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
-                                        <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event, {{ row['goal_id'] }})'>Remove</button>
-                                        <br>
-                                        {% endfor %}
-                                    </div>
-                                    </p>
-                                    <button type="button" onclick='addField(event)'>Add a goal</button>
-                                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
+                                    </p><div id="test">
+                                                                            </div>
+                                    <p></p>
+                                    <button type="button" onclick="addField(event)">Add a goal</button>
+                                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit"></div>
                                 </form>
                             </div>
                         </div>
 		    </div>
-        	</div>
-    	    </div>
-        </div>
-    </div>
+
+	    </div>
 </body>
 </html>
