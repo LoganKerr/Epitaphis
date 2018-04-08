@@ -27,6 +27,7 @@
         
         foreach ($_POST as $key => $value)
         {
+            echo substr($key, 0, 11)."<br>";
             if (substr($key, 0, 11) == "goal_remove")
             {
                 $goal_id = filter_var(substr($key, 11), FILTER_SANITIZE_NUMBER_INT);
@@ -42,18 +43,15 @@
             // if new goal added
             else if (substr($key, 0, 13) == "goal_name_new")
             {
-                if ($value != "")
-                {
-                    // inserts new goal into goals table with name and empty text
-                    $stmt = $conn->prepare("INSERT INTO `goals` (goalName, goalText) VALUES (?, '')");
-                    $stmt->bind_param("s", $value);
-                    $stmt->execute();
-                    $new_goal_id = $conn->insert_id;
-                    // inserts new goal into role_assoc for user who posted request
-                    $stmt = $conn->prepare("INSERT INTO `goal_assoc` (user_id, goal_id) VALUES (?, ?)");
-                    $stmt->bind_param("ii", $user_id, $new_goal_id);
-                    $stmt->execute();
-                }
+                // inserts new goal into goals table with name and empty text
+                $stmt = $conn->prepare("INSERT INTO `goals` (goalName, goalText) VALUES (?, '')");
+                $stmt->bind_param("s", $value);
+                $stmt->execute();
+                $new_goal_id = $conn->insert_id;
+                // inserts new goal into role_assoc for user who posted request
+                $stmt = $conn->prepare("INSERT INTO `goal_assoc` (user_id, goal_id) VALUES (?, ?)");
+                $stmt->bind_param("ii", $user_id, $new_goal_id);
+                $stmt->execute();
             }
             else if (substr($key, 0, 13) == "goal_text_new")
             {
