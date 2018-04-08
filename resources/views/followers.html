@@ -1,0 +1,78 @@
+{% include 'templates/header.html' %}
+{% include 'templates/navbar.html' with nav %}
+<body>
+    <div id="follower-panel" class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Followers</div>
+                <div class="panel-body">
+                    <script>
+                        function openTab(e, tabName)
+                        {
+                            var i, tabconent, tablinks;
+                            
+                            // Get all elements with class="tabcontent" and hide them
+                            tabcontent = document.getElementsByClassName("tabcontent");
+                            for (i = 0; i < tabcontent.length; i++)
+                            {
+                                tabcontent[i].style.display = "none";
+                            }
+                            
+                            // Get all elements with class="tablinks" and remove the class "active"
+                            tablinks = document.getElementsByClassName("tablinks");
+                            for (i = 0; i < tablinks.length; i++) {
+                                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                            }
+                            
+                            // Show the current tab, and add an "active" class to the button that opened the tab
+                            document.getElementById(tabName).style.display = "block";
+                            e.currentTarget.className += " active";
+                        }
+                    </script>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openTab(event, 'Following')">Following</button>
+                        <button class="tablinks" onclick="openTab(event, 'Followers')">Followers</button>
+                        <button class="tablinks" onclick="openTab(event, 'Requests')">Requests</button>
+                    </div>
+                    <div id="Following" class="tabcontent">
+                        <h3>Following</h3>
+                        <form method="post" action="/Epitaphis/removeFollowing.php">
+                            <p>
+                                <ul>
+                                    {% for row in usersYouAreFollowing %}
+                                    <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </p>
+                        </form>
+                    </div>
+                    <div id="Followers" class="tabcontent">
+                        <h3>Followers</h3>
+                        <form method="post" action="/Epitaphis/removeFollowers.php">
+                            <p>
+                            <ul>
+                                {% for row in usersFollowingYou %}
+                                <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                {% endfor %}
+                            </ul>
+                            </p>
+                        </form>
+                    </div>
+                    <div id="Requests" class="tabcontent">
+                        <h3>Requests</h3>
+                        <form method="post" action="/Epitaphis/followerRequests.php">
+                            <p>
+                            <ul>
+                                {% for row in usersRequestingToFollowYou %}
+                                <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                {% endfor %}
+                            </ul>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
