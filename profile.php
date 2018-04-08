@@ -26,6 +26,7 @@
             header("Location: profile.php?id=".$profile_user_id);
         }
         $bio = $_POST['bio'];
+        $profile_picture_id = $_POST['profile_picture_id'];
         
         // goal id of new goal added
         $new_goal_id = -1;
@@ -87,12 +88,9 @@
         }
         if (count($error) == 0)
         {
-            $stmt = $conn->prepare("UPDATE `users` SET `bio`=? WHERE `id`=?");
-            $stmt->bind_param("si", $bio, $user_id);
-            if (!$stmt->execute())
-            {
-                echo "Profile Error: ".$stmt->error;
-            }
+            $stmt = $conn->prepare("UPDATE `users` SET `bio`=?, `profile_picture_id`=? WHERE `id`=?");
+            $stmt->bind_param("sii", $bio, $profile_picture_id, $user_id);
+            $stmt->execute();
         }
     } //ends post request
     
@@ -111,15 +109,28 @@
         $i++;
     }
     
-    $stmt2 = $conn->prepare("SELECT `firstName`, `lastName`, `bio` FROM `users` WHERE `id`=?");
+    $stmt2 = $conn->prepare("SELECT `path`, `firstName`, `lastName`, `bio` FROM `users` INNER JOIN `profile_pictures` ON `users`.`profile_picture_id`=`profile_pictures`.`id` WHERE `users`.`id`=?");
     $stmt2->bind_param("i", $profile_user_id);
     $stmt2->execute();
     $res2 = $stmt2->get_result();
     $row2 = $res2->fetch_assoc();
     
+    $stmt3 = $conn->prepare("SELECT `id`, `path` FROM `profile_pictures`");
+    $stmt3->execute();
+    $res3 = $stmt3->get_result();
+    $i = 0;
+    
+    while ($row = $res3->fetch_assoc())
+    {
+        $image_rows[$i] = $row;
+        $i++;
+    }
+    
     $bio = $row2['bio'];
     $firstName = $row2['firstName'];
     $lastName = $row2['lastName'];
+    $profile_picture_path = $row2['path'];
+    $profile_pictue_id = $row['id'];
     
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
@@ -129,11 +140,14 @@
     echo $twig->render('profile.html', array(
                                              'nav' => array('page' => $_SERVER['PHP_SELF'], 'admin' => $admin),
                                              'rows' => $rows,
+                                             'image_rows' => $image_rows,
                                              'profile_user_id' => $profile_user_id,
                                              'bio' => $bio,
                                              'firstName' => $firstName,
                                              'lastName' => $lastName,
-                                             'owner' => $owner
+                                             'owner' => $owner,
+                                             'profile_picture_path' => $profile_picture_path,
+                                             'profile_picture_id' => $profile_picture_id
                                              ));
     ?>
 
