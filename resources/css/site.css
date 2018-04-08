@@ -57,7 +57,24 @@ body
 
 .home-left
 {
-    background-color:#d1ccc6;
+   margin-left: 5%;
+}
+
+.home-right
+{
+    background-color: white;
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+    padding-left: 2em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.home-right h2 
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 .form-label
