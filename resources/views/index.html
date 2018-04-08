@@ -1,13 +1,61 @@
 {% include 'templates/header.html' %}
 <body>
-    <div id="home-panel" class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading text-center"><image class="logo" src="/Epitaphis/resources/images/epitaph-01.svg"></image></div>
-            <div class="panel-body">
-                <a href="/Epitaphis/login.php" class="btn btn-primary btn-block">Log in</a><br />
-                <a href="/Epitaphis/signup.php" class="btn btn-primary btn-block" role="button">Sign up</a>
-            </div>
-        </div>
+    <div class="row">
+        <div class="col-lg-6">
+	    <div class="home-left">
+		<image class="logo" src="/Epitaphis/resources/images/epitaph-01.svg"></image>
+	        <h1>Some text here</h1>
+		<h1>Some text here</h1>
+		<h1>Some text here</h1>
+	    </div>
+	</div>
+	<div class="col-lg-6">
+	    <div>
+	        <form method="post" action="/Epitaphis/index.php">
+		    <p>
+		        <label>Email:</label><input type="text" name="email"/>
+		        <label>Password:</label><input type="password" name="pass" />
+                <input type="hidden" name="form" value="login" />
+                <input class="btn btn-default" type="submit" value="Login" />
+		    </p>
+		    <p>
+		        {{ error['login_email']? error['login_email'] }}
+                {{ error['password']? error['password'] }}
+		    </p>
+		</form>
+	    </div>
+	    <hr>
+	    <div>
+		<form method="post" action="/Epitaphis/index.php">
+		     <p>
+                        <label class="form-label">Email:</label><input class="textbox" name="email" type="text" value='{{ signup_email }}'/>
+                        {{ error['signup_email']? error['signup_email'] }}
+                    </p>
+                    <p>
+                        <label class="form-label">First Name:</label>
+                        <input class="textbox" name="firstName" type="text" value='{{ firstName }}'/>
+                        {{ error['firstName']? error['firstName'] }}
+                    </p>
+		     <p>
+                        <label class="form-label">Last Name:</label>
+                        <input class="textbox" name="lastName" type="text" value='{{ lastName }}'/>
+                        {{ error['lastName']? error['lastName'] }}
+                    </p>
+                    <p>
+                        <label class="form-label">Password:</label>
+                        <input class="textbox" name="pass1" type="password" />
+                        {{ error['pass1']? error['pass1'] }}
+                    </p>
+                    <p>
+                        <label class="form-label">Confirm password:</label>
+                        <input class="textbox" name="pass2" type="password" />
+                        {{ error['pass2']? error['pass2'] }}
+                    </p>
+                    <input type="hidden" name="form" value="signup" />
+                    <div class="submit-button"><input class="btn btn-default" type="submit" value="Submit" /></div>
+		</form>
+	    </div>
+	</div>
     </div>
 </body>
 </html>

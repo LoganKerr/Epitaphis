@@ -1,8 +1,11 @@
 body
 {
-    background-image: url("/Epitaphis/resources/images/blueprint.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color:white;
+}
+
+.home-left
+{
+    background-color:#d1ccc6;
 }
 
 .form-label
@@ -11,14 +14,6 @@ body
     margin-right: 1em;
 }
 
-#home-panel
-{
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform:translateX(-50%) translateY(-50%);
-    width: 30%;
-}
 
 #login-panel
 {
