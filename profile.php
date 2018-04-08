@@ -96,7 +96,7 @@
         }
     } //ends post request
     
-    $profile_user_id = $_GET['id'];
+    $profile_user_id = (($_GET['id'])? $_GET['id'] : $user_id);
     $owner = (($profile_user_id == $user_id)? true : false);
     
     $stmt = $conn->prepare("SELECT `goal_assoc`.`goal_id`, `goals`.`goalName`, `goals`.`goalText` FROM `goal_assoc` LEFT JOIN `goals` ON `goal_assoc`.`goal_id`=`goals`.`id` WHERE `goal_assoc`.`user_id`=?");
