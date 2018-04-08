@@ -11,24 +11,25 @@
 	</div>
 	<div class="col-lg-6">
 	    <div>
-	        <form method="post" action="/Epitaphis/login.php">
+	        <form method="post" action="/Epitaphis/index.php">
 		    <p>
 		        <label>Email:</label><input type="text" name="email"/>
 		        <label>Password:</label><input type="password" name="pass" />
-			<input class="btn btn-default" type="submit" value="Login" />
+                <input type="hidden" name="form" value="login" />
+                <input class="btn btn-default" type="submit" value="Login" />
 		    </p>
 		    <p>
-		        {{ error['email']? error['email'] }}
-			{{ error['password']? error['password'] }}
+		        {{ error['login_email']? error['login_email'] }}
+                {{ error['password']? error['password'] }}
 		    </p>
 		</form>
 	    </div>
 	    <hr>
 	    <div>
-		<form method="post" action="/Epitaphis/signup.php">
+		<form method="post" action="/Epitaphis/index.php">
 		     <p>
-                        <label class="form-label">Email:</label><input class="textbox" name="email" type="text" value='{{ email }}'/>
-                        {{ error['email']? error['email'] }}
+                        <label class="form-label">Email:</label><input class="textbox" name="email" type="text" value='{{ signup_email }}'/>
+                        {{ error['signup_email']? error['signup_email'] }}
                     </p>
                     <p>
                         <label class="form-label">First Name:</label>
@@ -50,6 +51,7 @@
                         <input class="textbox" name="pass2" type="password" />
                         {{ error['pass2']? error['pass2'] }}
                     </p>
+                    <input type="hidden" name="form" value="signup" />
                     <div class="submit-button"><input class="btn btn-default" type="submit" value="Submit" /></div>
 		</form>
 	    </div>
