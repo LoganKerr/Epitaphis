@@ -240,3 +240,10 @@ body
     min-height: 460px;
 }
 
+.profile-content h1 {
+    text-align: center;
+}
+
+.goal-buttons {
+    text-align: center;
+}

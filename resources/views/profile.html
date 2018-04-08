@@ -83,7 +83,7 @@
 			<div class="quote">Insert quote here
 		    </div>
                     <div class="profile-content">
-                        <div class="panel-heading">Change your information</div>
+                        <h1>Update your goals!</h1>
                             <div class="panel-body">
                                 <script>
                                     var boxId = 1;
@@ -145,9 +145,11 @@
                                         {% endfor %}
                                     </div>
                                     {% if owner %}
-                                    <button type="button" onclick="addField(event)">Add a goal</button>
-                                    <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit"></div>
-                                    {% endif %}
+				    <div class="goal-buttons">
+                                        <button type="button" class="btn btn-success" onclick="addField(event)">ADD A NEW GOAL</button>
+                                        <input class="btn btn-primary" type="submit" value="SUBMIT GOAL CHANGES" />
+				    </div>
+				    {% endif %}
                                 </form>
                             </div>
                         </div>
