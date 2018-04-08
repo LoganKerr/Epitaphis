@@ -157,26 +157,43 @@ body
 
 /* Profile User Pic */
 .profile-userpic img {
-    float: none;
+    /*float: none;
     margin: 0 auto;
     margin-left: 25%;
-    margin-right: auto;
+    margin-right: auto;*/
+    margin-left: 6em;
+    margin-bottom: 2em;
     width: 50%;
-    height: 50%;
+    /*height: 75%;*/
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
 }
+
+.btn.btn-default.profile-button {
+    margin-left: 6.5em;
+}
+
+.profile-submit-button {
+    margin-top: 2em;
+    margin-left: 9em;
+    margin-bottom: 2em;
+}
+
+.profile-pic-list {
+    list-style-type: none;
+    margin-right: 3em;
+    margin-top: 1em;
+}
+
 .row.profile{
-    background-color: white;
+
 }
 .quote {
-    opacity: 0.65;
-    padding-left: 33px;
+    margin-top: 2.1em;
+    margin-bottom: 2em;
     text-transform: capitalize;
-    display: inline;
     font-size: 21px;
-    font-size: oblique;
 }
 
 .profile-usertitle{
@@ -223,6 +240,7 @@ body
     min-height: 460px;
 }
 
+<<<<<<< HEAD
 /* stream php */
 .main-stream {
     background: #fff;
@@ -269,3 +287,12 @@ body
 .stream-prof-pic {
 }
 
+=======
+.profile-content h1 {
+    text-align: center;
+}
+
+.goal-buttons {
+    text-align: center;
+}
+>>>>>>> origin/derrick
