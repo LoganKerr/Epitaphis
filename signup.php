@@ -94,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
     
-    echo $twig->render('signup.html', array(
-                                            'email' => $email,
-                                            'firstName' => $firstName,
-                                            'lastName' => $lastName,
-                                            'error' => $error
+    echo $twig->render('index.html', array(
+                                            'signup_email' => $email,
+                                            'signup_firstName' => $firstName,
+                                            'signup_lastName' => $lastName,
+                                            'signup_error' => $error
                        ));
     
 ?>

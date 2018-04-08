@@ -18,8 +18,8 @@
 			<input class="btn btn-default" type="submit" value="Login" />
 		    </p>
 		    <p>
-		        {{ error['email']? error['email'] }}
-			{{ error['password']? error['password'] }}
+		        {{ login_error['email']? login_error['email'] }}
+                {{ login_error['password']? login_error['password'] }}
 		    </p>
 		</form>
 	    </div>
@@ -28,27 +28,27 @@
 		<form method="post" action="/Epitaphis/signup.php">
 		     <p>
                         <label class="form-label">Email:</label><input class="textbox" name="email" type="text" value='{{ email }}'/>
-                        {{ error['email']? error['email'] }}
+                        {{ signup_error['email']? signup_error['email'] }}
                     </p>
                     <p>
                         <label class="form-label">First Name:</label>
                         <input class="textbox" name="firstName" type="text" value='{{ firstName }}'/>
-                        {{ error['firstName']? error['firstName'] }}
+                        {{ signup_error['firstName']? signup_error['firstName'] }}
                     </p>
 		     <p>
                         <label class="form-label">Last Name:</label>
                         <input class="textbox" name="lastName" type="text" value='{{ lastName }}'/>
-                        {{ error['lastName']? error['lastName'] }}
+                        {{ signup_error['lastName']? signup_error['lastName'] }}
                     </p>
                     <p>
                         <label class="form-label">Password:</label>
                         <input class="textbox" name="pass1" type="password" />
-                        {{ error['pass1']? error['pass1'] }}
+                        {{ signup_error['pass1']? signup_error['pass1'] }}
                     </p>
                     <p>
                         <label class="form-label">Confirm password:</label>
                         <input class="textbox" name="pass2" type="password" />
-                        {{ error['pass2']? error['pass2'] }}
+                        {{ signup_error['pass2']? signup_error['pass2'] }}
                     </p>
                     <div class="submit-button"><input class="btn btn-default" type="submit" value="Submit" /></div>
 		</form>
