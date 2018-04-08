@@ -17,12 +17,16 @@
                                     {{ firstName ~ " " ~ lastName}}
                                 </div>
                                 <div class="profile-user-bio">
+                                    {% if owner %}
                                     <form method="post" action="profile.php?id={{ profile_user_id }}">
                                     <input type="hidden" name="profile_user_id" value="{{ profile_user_id }}"></input>
                                     <label class="form-label">Bio:</label>
                                     <input type="text" name="bio" placeholder="Tell us about yourself" value="{{ bio }}">
                                     <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit"></div>
                                     </form>
+                                    {% else %}
+                                    {{ bio }}
+                                    {% endif %}
                                 </div>
                                 <!-- END SIDEBAR USER TITLE -->
                                 <!-- SIDEBAR MENU START -->
@@ -98,10 +102,11 @@
                                         <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event, {{ row['goal_id'] }})'>Remove</button>
                                         <br>
                                         {% endfor %}
-
                                     </div>
+                                    {% if owner %}
                                     <button type="button" onclick="addField(event)">Add a goal</button>
                                     <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit"></div>
+                                    {% endif %}
                                 </form>
                             </div>
                         </div>
