@@ -34,19 +34,43 @@
                         <button class="tablinks" onclick="openTab(event, 'Requests')">Requests</button>
                     </div>
                     <div id="Following" class="tabcontent">
-                        <h3>Following</h3>
+                        <script>
+                            function toggleCancelUser(e, id)
+                            {
+                                var user = document.getElementById("usersYouAreFollowing"+id);
+                                var userLI = document.getElementById("usersYouAreFollowingLI"+id);
+                                var userButton = document.getElementById("usersYouAreFollowingButton"+id);
+                                if (user.value == "cancel")
+                                {
+                                   // uncancels user from following given user
+                                   user.value="";
+                                   userLI.style="";
+                                }
+                                else
+                                {
+                                    // cancels user from following given user
+                                    user.value="cancel";
+                                    userLI.style="background: #CCC;";
+                                }
+                            }
+                        </script>
+                        <h3>You are following:</h3>
                         <form method="post" action="/Epitaphis/removeFollowing.php">
                             <p>
                                 <ul>
                                     {% for row in usersYouAreFollowing %}
-                                    <li>{{ row['firstName'] ~ " " ~ row['lastName'] }}</li>
+                                    <li id="usersYouAreFollowingLI{{ row['id'] }}">{{ row['firstName'] ~ " " ~ row['lastName'] }}
+                                        <input type="hidden" id="usersYouAreFollowing{{ row['id'] }}" name="usersYouAreFollowing{{ row['id'] }}" value="" />
+                                        <button type="button" id="usersYouAreFollowingButton{{ row['id'] }}" onclick="toggleCancelUser(event, {{ row['id'] }})">Cancel</button>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </p>
+                            <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
                         </form>
                     </div>
                     <div id="Followers" class="tabcontent">
-                        <h3>Followers</h3>
+                        <h3>Who is following you:</h3>
                         <form method="post" action="/Epitaphis/removeFollowers.php">
                             <p>
                             <ul>
@@ -58,7 +82,7 @@
                         </form>
                     </div>
                     <div id="Requests" class="tabcontent">
-                        <h3>Requests</h3>
+                        <h3>Who is requesting to follow you:</h3>
                         <form method="post" action="/Epitaphis/followerRequests.php">
                             <p>
                             <ul>

@@ -22,13 +22,11 @@
                         end.appendChild(inputGoalText);
                         end.appendChild(document.createElement("br"));
                     }
-                    function removeGoal(e)
+                    function removeGoal(e, id)
                     {
-                        var target = document.getElementById(e.target.id);
-                        var targetId = target.id.substring(11);
-                        var goal_name = document.getElementById("goal_name"+targetId);
-                        var goal_text = document.getElementById("goal_text"+targetId);
-                        var goal_button = document.getElementById("goal_button"+targetId);
+                        var goal_name = document.getElementById("goal_name"+id);
+                        var goal_text = document.getElementById("goal_text"+id);
+                        var goal_button = document.getElementById("goal_button"+id);
                         if (target.value == "remove")
                         {
                             goal_name.disabled=false;
@@ -62,7 +60,7 @@
                             <input type="text" id='goal_name{{ row['goal_id'] }}' name='goal_name{{ row['goal_id'] }}' value='{{ row['goalName'] }}'></input>
                             <input type="hidden" name='goal_id{{ row['goal_id'] }}' value='{{ row['goal_id'] }}'/>
                             <input type="text" id='goal_text{{ row['goal_id'] }}' name='goal_text{{ row['goal_id'] }}' value='{{ row['goalText'] }}'/>
-                            <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event)'>Remove</button>
+                            <button type="button" id='goal_button{{ row['goal_id'] }}' onclick='removeGoal(event, {{ row['goal_id'] }})'>Remove</button>
                             <br>
                         {% endfor %}
                         </div>
