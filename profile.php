@@ -109,7 +109,7 @@
         $i++;
     }
     
-    $stmt2 = $conn->prepare("SELECT `path`, `firstName`, `lastName`, `bio` FROM `users` INNER JOIN `profile_pictures` ON `users`.`profile_picture_id`=`profile_pictures`.`id` WHERE `users`.`id`=?");
+    $stmt2 = $conn->prepare("SELECT `profile_picture_id`, `path`, `firstName`, `lastName`, `bio` FROM `users` INNER JOIN `profile_pictures` ON `users`.`profile_picture_id`=`profile_pictures`.`id` WHERE `users`.`id`=?");
     $stmt2->bind_param("i", $profile_user_id);
     $stmt2->execute();
     $res2 = $stmt2->get_result();
@@ -130,7 +130,7 @@
     $firstName = $row2['firstName'];
     $lastName = $row2['lastName'];
     $profile_picture_path = $row2['path'];
-    $profile_pictue_id = $row['id'];
+    $profile_picture_id = $row2['profile_picture_id'];
     
     $loader = new Twig_Loader_Filesystem('resources/views');
     $twig = new Twig_Environment($loader);
