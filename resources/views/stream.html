@@ -1,27 +1,24 @@
 {% include 'templates/header.html' %}
 {% include 'templates/navbar.html' with nav %}
 <body>
-
     <div class="stream-main-logo">
-	<img src="/Epitaphis/resources/images/epitaph-01.svg" >
+        <img src="/Epitaphis/resources/images/epitaph-01.svg" >
     </div>
-
     <div class="main-stream">
-	
-	<div class="left-posts">
-	    left posts
-	</div>
-
-	<div class="right-side">
-
-  	    <div class="right-profile-pic">
-	        <img src="/Epitaphis/resources/images/profile_photos/pink_ghostie.png" style="width:100%;" > 
-  	    </div>
-
- 	    <div class="right-profile-name">
-		<p>NAME</p>
- 	    </div>
-        </div>
+        {% for row in rows %}
+            <div class="left-posts">
+                {{ row['goalName'] ~ ", " ~ row['goalText'] }}
+            </div>
+            <div class="right-side">
+                <div class="right-profile-pic">
+                    <img src="/Epitaphis/resources/images/profile_photos/{{ row['path'] }}" style="width:100%;" >
+                </div>
+                <div class="right-profile-name">
+                    <p>{{ row['firstName'] ~ " " ~ row['lastName'] }}</p>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
 	<!-- ><div class-"right-profile-ghost">
 	    <img src="/Epitaphis/resources/images/ghost.png" width="12%"  >
 	</div> <-->
