@@ -4,9 +4,11 @@
     <div class="stream-main-logo">
         <img src="/Epitaphis/resources/images/epitaph-01.svg" >
     </div>
-    <div class="main-stream" style="width: 70%; margin-right: 30%;">
+    <div class="main-stream">
         {% for row in rows %}
-            <div class="left-posts">
+            <div class="left-side">
+            </div>
+            <div class="middle-posts">
                 {{ row['goalName'] ~ ", " ~ row['goalText'] }}
             </div>
             <div class="right-side">
