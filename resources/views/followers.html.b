@@ -1,12 +1,11 @@
 {% include 'templates/header.html' %}
 {% include 'templates/navbar.html' with nav %}
-<body onload="openTab(event, 'Followers')">
-    
-    <div class="followers-main">
-	<div class="follow-left">
-
-		<div class="panel-body">
-			<script>
+<body>
+    <div id="follower-panel" class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Followers</div>
+                <div class="panel-body">
+                    <script>
                         function openTab(e, tabName)
                         {
                             var i, tabconent, tablinks;
@@ -28,13 +27,13 @@
                             document.getElementById(tabName).style.display = "block";
                             e.currentTarget.className += " active";
                         }
-                   	</script>
-			<div class="tab">
-				<button class="tablinks" onclick="openTab(event, 'Following')">Following</button>
-				<button class="tablinks" onclick="openTab(event, 'Followers')">Followers</button>
-				<button class="tablinks" onclick="openTab(event, 'Requests')">Requests</button>
-			</div>
-			<script>
+                    </script>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openTab(event, 'Following')">Following</button>
+                        <button class="tablinks" onclick="openTab(event, 'Followers')">Followers</button>
+                        <button class="tablinks" onclick="openTab(event, 'Requests')">Requests</button>
+                    </div>
+                    <script>
                         /* When the user clicks on the button,
                          toggle between hiding and showing the dropdown content */
                     function myFunction() {
@@ -72,6 +71,15 @@
                             }
                         }
                     </script>
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">Search Users</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                                {% for row in usersSearch %}
+                                <a href="profile.php?id={{ row['id'] }}">{{ row['firstName'] ~  " " ~ row['lastName']}}</a>
+                                {% endfor %}
+                                </div>
+                    </div>
                     <div id="Following" class="tabcontent">
                         <script>
                             function toggleCancelUser(e, id)
@@ -182,29 +190,11 @@
                             </p>
                             <div class="submit-button"><input class="btn btn-primary btn-block" type="submit" value="Submit" /></div>
                         </form>
-                    
-		</div>
-
-		<!-- 
-		<div class="dropdown">
-		<button onclick="myFunction()" class="dropbtn">Search Users</button>
-		<div id="myDropdown" class="dropdown-content">
-		<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-			{% for row in usersSearch %}
-				<a href="profile.php?id={{ row['id'] }}">{{ row['firstName'] ~  " " ~ row['lastName']}}</a>
-			{% endfor %}
-		</div> -->
-
-	</div>
-
-
-
-	<div class="follow-right">
-	    <div class="pic-right">
-		<img class="followers-icon" src="/Epitaphis/resources/images/profile_photos/green_ghostie.png">
-	    </div>
-	    <div class="followers-name"> NAME </div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
+
